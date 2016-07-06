@@ -24,14 +24,14 @@ Plugin normalises the boolean fields if data is presented and maintains the form
 # Getting Started
 
 Download the latest release from the Releases tab in Github:
-https://github.com/...
+https://github.com/nla/aspace_reftracker
 
 Unzip it to the plugins directory:
 
     $ cd /path/to/archivesspace/plugins
-    $ unzip /path/to/your/downloaded/aspace-reftracker.zip
-    $ mv aspace-reftracker/reftracker_records .
-    $ rmdir aspace-reftracker
+    $ unzip /path/to/your/downloaded/aspace_reftracker.zip
+    $ mv aspace_reftracker/reftracker_records .
+    $ rmdir aspace_reftracker
 
 Enable the plugin by editing the file in 'config/config.rb':
 

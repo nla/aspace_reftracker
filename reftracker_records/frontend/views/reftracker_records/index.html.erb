@@ -1,0 +1,33 @@
+<%= setup_context(:title => I18n.t("plugins.reftracker_records.search_reftracker"), :controller => :reftracker_records) %>
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="record-pane">
+          
+      <h2><%= I18n.t("plugins.reftracker_records.search_reftracker") %></h2>
+
+      <%= render_aspace_partial :partial => "shared/flash_messages" %>
+
+      <%= form_for :reftracker_records, url: { :controller => :reftracker_records, :action => :search } do |f| %>
+
+      <div class="row">  
+        <div class="col-md-6 col-md-offset-3">
+          
+          <%= f.label :qno, I18n.t("plugins.reftracker_records.enter_qnos") %>
+
+          <%= f.text_field :qno, :required => true %> 
+
+          <%= f.submit "Find my reftracker record", class: "btn btn-primary" %>           
+    
+        </div>
+      </div>
+      
+      <% end %> 
+      
+    </div>   
+  </div>
+</div>
+
+           
+
+

@@ -1,0 +1,22 @@
+en:
+  plugins:
+    reftracker_records:
+      label: Import Reftracker Records
+      search_reftracker: Import Accessions from Reftracker
+      enter_qnos: Type a valid Reftracker question number in the box below.
+      list_reftracker: Details of Reftracker record mapped to ArchivesSpace field names
+      base_url: Reftracker API base url in config.rb
+      mandatory_fields:  comma seperated list of mandatory reftracker fields in config.rb
+      mappings_file: "a CSV file containing reftracker-aspace mappings at location /plugins/reftracker_records/frontend/reftracker_aspace_mappings.csv"
+      messages:
+        missing_configuration: "The following values need to be configured before the Reftracker importer will work: %{params}. Contact your system's administrator."
+        qno_not_provided: Please enter a valid reftracker question number starting with 'NLAsc'.
+        more_than_one_qno: "More than one unique question numbers entered: %{qnos}" 
+        server_error: "Error returned by Reftracker API: %{error}"
+        qno_not_found: "No matching record found in reftracker. Please ensure %{qno} is closed in reftracker and not included in reftracker knowledge base."        
+        ref_mandatory_fields: "%{qno}: Following reftracker fields have missing values: %{fields}."
+        missing_data: Data to be imported is not available in the template. Please contact your system's administrator.
+        cancel_import: Cancelled import. Please enter a reftracker question number to import.             
+        malformed_csv: "Malformed mappings file - %{csv}"
+        
+

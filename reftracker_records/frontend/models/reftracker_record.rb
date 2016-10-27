@@ -23,7 +23,7 @@ class ReftrackerRecord
     #set search params 
     search_params = 
       {
-        :questionno => qno,
+        :questionno => qno + '|' + qno,
         :db => '5',
         :pagesize => '1',
         :scopeanswer => '1',

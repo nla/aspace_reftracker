@@ -30,7 +30,6 @@ class ReftrackerRecord
   
       params = 
       {
-        :responseFormat   =>  100,
         :parameters => search_params.to_json
       }  
       

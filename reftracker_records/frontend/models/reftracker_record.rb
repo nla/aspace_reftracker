@@ -23,23 +23,15 @@ class ReftrackerRecord
     #set search params 
     search_params = 
       {
-        :questionno => qno,
+        :questionno => qno + '|' + qno,
         :db => '5',
-        :pagesize => '1',
-        :scopeanswer => '1',
-        :scopequestion => '1',
-        :columnList => columns_list,
-        :expresources => '1',
-        :expcategories => '1',
-        :expjournaltotals => '1',
-        :expansweratts => '1'
+        :columnList => columns_list
       }
-      
+  
       params = 
       {
         :responseFormat   =>  100,
-        :callbackFunction =>  'parsedResponse',
-        :searchParameters => search_params.to_json
+        :parameters => search_params.to_json
       }  
       
       payload = nil    

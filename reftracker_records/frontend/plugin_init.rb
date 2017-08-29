@@ -4,8 +4,10 @@ require 'logger'
 
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'gems', 'htmlentities-4.3.4', 'lib')))
 
-my_routes = [File.join(File.dirname(__FILE__), "routes.rb")]
-ArchivesSpace::Application.config.paths['config/routes'].concat(my_routes)
+#my_routes = [File.join(File.dirname(__FILE__), "routes.rb")] -- ASpacev2.1.0 onwards
+#ArchivesSpace::Application.config.paths['config/routes'].concat(my_routes)  -- ASpacev2.1.0 onwards
+
+ArchivesSpace::Application.extend_aspace_routes(File.join(File.dirname(__FILE__), "routes.rb"))   # ASpacev2.1.0 onwards
 
 FileUtils.mkdir_p(File.join(ASUtils.find_base_directory, 'logs'))
 

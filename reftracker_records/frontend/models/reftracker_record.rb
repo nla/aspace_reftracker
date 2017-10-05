@@ -36,17 +36,21 @@ class ReftrackerRecord
       payload = nil    
     
     # Query the Reftracker API - search for question number
-    begin     
-      uri = URI.parse(base_url)
-      http = Net::HTTP.new(uri.host, uri.port)        
-      request = Net::HTTP::Post.new(uri.request_uri)
-      request.set_form_data(params)
-        
-      response = http.start do |http| 
-        http.request(request)
-      end
+    begin
+      uri = URI(base_url)      
       
-      # check the response from Reftracker API
+      req = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
+      req.set_form_data(params)
+
+      # log the request to Reftracker API
+      ReftrackerLog.log "Reftracker Request: #{req.body}"
+      
+      response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|     
+        http.request(req)    
+      end
+
+      # log the response from Reftracker API
+      ReftrackerLog.log "Reftracker Response: #{response.body}" 
       Rails.logger.debug(response)
 
     rescue Exception => e

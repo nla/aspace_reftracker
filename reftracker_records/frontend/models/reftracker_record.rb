@@ -183,6 +183,9 @@ class ReftrackerRecord
     # Customisation - set AS mandatory field agent primary name with client name from reftracker if organisation name (client name2) is not provided 
     acc_record["agent_name_primary_name"] = ref_record["client_name"] if acc_record["agent_name_primary_name"].blank? 
 
+    # Customisation - set AS field 'accession_general_note' with default fixed value
+    acc_record["accession_general_note"] = "PO#:\r\nPREVIOUS LOCATIONS:" if acc_record["accession_general_note"].blank? 
+
     # Check and set default Archives Space boolean field values if they exist in the reftracker record
     as_boolean_fields = ["user_defined_boolean_1","user_defined_boolean_2","user_defined_boolean_3","accession_publish","accession_restrictions_apply","accession_use_restrictions", "accession_rights_determined",
     "accession_acknowledgement_sent","accession_agreement_received","accession_agreement_sent","accession_cataloged","accession_processed"]

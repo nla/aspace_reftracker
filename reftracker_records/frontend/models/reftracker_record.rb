@@ -192,6 +192,9 @@ class ReftrackerRecord
 
     as_boolean_fields.all? { |x| acc_record[x].upcase.match(/\A(1|T|Y|YES|TRUE)\Z/) ? acc_record[x] = 1 : acc_record[x] = 0 unless (!acc_record.has_key? x or acc_record[x].nil?) }
 
+    # Remove telephone entries from accession hash if empty
+    acc_record.except!('agent_contact_telephone','agent_contact_telephone_ext') if acc_record['agent_contact_telephone'].blank?
+
     # Decode HTML entities; escape \r\n newline characters for csv to handle values correctly
     acc_record_escpd = Hash[acc_record.map { |k,v| [k, (v =~ /[\r\n]/) ? "\"#{HTMLEntities.new.decode(v)}\"" : v.blank? ? v : HTMLEntities.new.decode(v)] }]
 

@@ -211,6 +211,10 @@ class ReftrackerRecord
     tempfile
   end  
 
+  def helpers
+    ActionController::Base.helpers
+  end
+
 end ##end of class
 
 

@@ -83,7 +83,10 @@ class ReftrackerRecord
         raise ReftrackerAPIException.new(I18n.t('plugins.reftracker_records.messages.ref_mandatory_fields', :fields => missing.join(", "), :qno => "#{qno}"))
     end 
 
-    payload
+    # return a sanitized verson of the payload - html tags removed and special chars unescaped (eg: &amp; -> &)
+    #  note: calling decode twice is intentional and necessary to correctly sanitize the data
+    dec = HTMLEntities.new
+    Hash[payload.map {|k, v| [k, dec.decode(helpers.strip_tags(dec.decode(v)))]}]
   end
 
 
@@ -195,12 +198,9 @@ class ReftrackerRecord
     # Remove telephone entries from accession hash if empty
     acc_record.except!('agent_contact_telephone','agent_contact_telephone_ext') if acc_record['agent_contact_telephone'].blank?
 
-    # Decode HTML entities; escape \r\n newline characters for csv to handle values correctly
-    acc_record_escpd = Hash[acc_record.map { |k,v| [k, (v =~ /[\r\n]/) ? "\"#{HTMLEntities.new.decode(v)}\"" : v.blank? ? v : HTMLEntities.new.decode(v)] }]
-
     csv_string = CSV.generate do |csv|
-       csv << acc_record_escpd.keys
-       csv << acc_record_escpd.values
+       csv << acc_record.keys
+       csv << acc_record.values
     end
 
     tempfile = ASUtils.tempfile('reftracker_import')
@@ -210,6 +210,10 @@ class ReftrackerRecord
 
     tempfile
   end  
+
+  def helpers
+    ActionController::Base.helpers
+  end
 
 end ##end of class
 
